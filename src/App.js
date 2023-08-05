@@ -1,25 +1,46 @@
-import logo from './logo.svg';
-import './App.css';
+import {
+    BrowserRouter as Router,
+    Routes,
+    Route
+} from 'react-router-dom'
+import AccountState from './context/accounts/AccountState';
+import NoteState from './context/notes/NotesState';
+
+import HomePage from './components/HomePage';
+import Navbar from './components/Navbar';
+import LoginPage from './components/LoginPage';
+import SignUpPage from './components/SignUpPage';
+import NotesPage from './components/NotesPage';
+import CreateNotePage from './components/CreateNotePage';
+import EditNotePage from './components/EditNotePage';
+import ThemeState from './context/themes/ThemeState';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+    return (
+        <div>
+            <AccountState>
+                <NoteState>
+                    <ThemeState>
+                        <div className="App">
+                            <Router>
+                                <Navbar />
+                                <Routes>
+                                    <Route path='/' element={<HomePage />} />
+                                    <Route path='/login' element={<LoginPage />} />
+                                    <Route path='/sign-up' element={<SignUpPage />} />
+                                    <Route path='/notes' element={<NotesPage />} />
+                                    <Route path='/create-note' element={<CreateNotePage />} />
+                                    <Route path='/edit-note' element={<EditNotePage />} />
+                                </Routes>
+                            </Router>
+                        </div>
+                    </ThemeState>
+                </NoteState>
+            </AccountState>
+        </div>
+    );
 }
 
 export default App;
