@@ -57,6 +57,7 @@ router.post('/create-account',
             return res.status(200).json("Account created successfully!");
 
         } catch (error) {
+            console.log(error);
             return res.status(500).json("Server Error: Cannot create account!");
         }
     }

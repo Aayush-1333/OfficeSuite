@@ -1,10 +1,11 @@
 import React from 'react'
 import '../styles/UpdatesItem.css'
+import updateImg from './UpdateImg.png'
 
 export default function UpdatesItem() {
     return (
         <div className="card news-item p-2 my-4 align-self-center">
-            <img src="https://th.bing.com/th/id/OIP.u1-LmbkCyPdCw9lUK6ZfEwHaE8?w=267&h=180&c=7&r=0&o=5&pid=1.7" className="card-img-top" alt="test" />
+            <img src={updateImg} className="card-img-top" alt="test" />
 
             <div className="card-body">
                 <h5 className="card-title">New version release 4.0!</h5>

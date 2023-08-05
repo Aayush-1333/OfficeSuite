@@ -16,7 +16,7 @@ export default function SignUpPage() {
 
     const SubmitForm = (e) => {
         e.preventDefault();
-        createAccount({...accountData});
+        createAccount({ ...accountData });
         navigate('/login')
     }
 

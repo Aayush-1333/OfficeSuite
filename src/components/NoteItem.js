@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import NoteContext from '../context/notes/NoteContext';
 import { useNavigate } from 'react-router-dom';
+import noteImg from './NoteImg.png'
 
 export default function NoteItem(props) {
     const navigate = useNavigate();
@@ -10,7 +11,7 @@ export default function NoteItem(props) {
 
     return (
         <div className='mx-4 my-4 border border-4 border-success rounded-4 p-4 note-page bg-tertiary'>
-            <img src="https://th.bing.com/th/id/OIP.KhymBuaK4vfORCFHz3ILpQHaHy?w=178&h=187&c=7&r=0&o=5&pid=1.7" width="50" height="140" className="card-img-top" alt="..." />
+            <img src={noteImg} width="50" height="140" className="card-img-top" alt="..." />
             <div className="card-body">
                 <h5 className="card-title my-4">{title}</h5>
 
