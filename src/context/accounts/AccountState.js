@@ -4,7 +4,7 @@ import AccountContext from './AccountContext'
 const AccountState = (props) => {
 
     // URL of backend for the accounts
-    const URL = "http://192.168.1.11:4000/api/auth";
+    const URL = "http://192.168.1.6:4000/api/auth";
 
     // =========== State variables ============
     const [logged, setLogged] = useState({

@@ -4,8 +4,7 @@
     Using express() the express server is started which handles all the requests and 
     responses using routes and database connection
 */
-const dotenv = require('dotenv');
-dotenv.config({ path: './config.env' });
+require('dotenv/config');
 const cors = require('cors');
 const express = require('express');
 const ConnectToMongo = require('./db');

@@ -6,7 +6,7 @@ import AccountContext from '../accounts/AccountContext';
 const NoteState = (props) => {
 
     // URL of the backend for notes
-    const URL = 'http://192.168.1.11:4000/api/notes';
+    const URL = 'http://192.168.1.6:4000/api/notes';
 
     // Context variables
     const { logged, checkResponse, setAlert } = useContext(AccountContext);
