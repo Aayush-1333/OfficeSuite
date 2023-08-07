@@ -1,15 +1,22 @@
 .news-item {
-    width: '50px'
+    border: 2px solid black;
+    margin: 15px;
+    border-radius: 10px;
+    word-wrap: break-word;
+}
+
+.news-img {
+    border-radius: 10px;
 }
 
 @media screen and (max-width: '750px') {
     .news-item {
-        width: '12px';
+        height: 350px;
     }
 }
 
-@media screen and (max-width: '450px') {
+@media screen and (max-width: '390px') {
     .news-item {
-        width: '1px';
+        height: 50px;
     }
 }

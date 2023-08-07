@@ -54,7 +54,7 @@ export default function LoginPage() {
                         <div className="mb-3">
                             <label htmlFor="password" className="form-label">Password</label>
                             <input type="password" className="form-control" id="password" name='password'
-                                onChange={handleChange} value={loginData.password} required />
+                                onChange={handleChange} value={loginData.password} required min={8} />
                         </div>
 
                         <button type="submit" className="btn btn-primary">Submit</button>

@@ -2,16 +2,24 @@ import React from 'react'
 import '../styles/UpdatesItem.css'
 import updateImg from './UpdateImg.png'
 
-export default function UpdatesItem() {
-    return (
-        <div className="card news-item p-2 my-4 align-self-center">
-            <img src={updateImg} className="card-img-top" alt="test" />
+export default function UpdatesItem(props) {
 
-            <div className="card-body">
-                <h5 className="card-title">New version release 4.0!</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <button className="btn btn-primary">Go somewhere</button>
-            </div>
+    const { data } = props;
+
+    return (
+        <div className='row justify-content-around'>
+            {
+                data.map((article) => {
+                    return <div key={article._id} className="card mb-3 news-item col-lg-3 col-md-4 col-sm-5">
+                        <img src={article.image || updateImg} className="card-img-top news-img mt-2" alt="..." />
+                        <div className="card-body">
+                            <h5 className="card-title text-wrap">{article.title}</h5>
+                            <p className="card-text">{article.description || "No description"}...</p>
+                            <a href={article.link} className="btn btn-success" target='_blank'>Read More</a>
+                        </div>
+                    </div>
+                })
+            }
         </div>
     )
 }

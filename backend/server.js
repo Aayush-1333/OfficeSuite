@@ -15,6 +15,7 @@ app.use(express.static(path.join(__dirname, '../build')));
 app.use(cors());
 app.use(express.json());
 
+
 // Middleware - to display the endpoint currently the user is navigating
 app.use((req, res, next) => {
     console.log(req.path, req.method);
@@ -24,6 +25,7 @@ app.use((req, res, next) => {
 // Routes - `auth.js` and `notes.js`
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/notes', require('./routes/notes'));
+app.use('/news', require('./routes/news'));
 
 
 // to serve index.html

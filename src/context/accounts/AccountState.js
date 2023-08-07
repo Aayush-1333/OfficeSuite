@@ -3,10 +3,9 @@ import AccountContext from './AccountContext'
 
 const AccountState = (props) => {
 
-    // URL of backend for the accounts
-    const URL = "http://192.168.1.6:4000/api/auth";
-
     // =========== State variables ============
+    const [ipAddr, setIpAddr] = useState("http://192.168.1.5:4000");
+
     const [logged, setLogged] = useState({
         status: false,
         username: ''
@@ -64,7 +63,7 @@ const AccountState = (props) => {
     // calls the API to create the account
     const createAccount = async (data) => {
         try {
-            const response = await fetch(`${URL}/create-account`, {
+            const response = await fetch(`${ipAddr}/api/auth/create-account`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -85,7 +84,7 @@ const AccountState = (props) => {
     // calls the API to get account details of desired user
     const getAccount = async (loginDetails) => {
         try {
-            const response = await fetch(`${URL}/get-account`, {
+            const response = await fetch(`${ipAddr}/api/auth/get-account`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -127,7 +126,7 @@ const AccountState = (props) => {
     // provides direct login to the existing user if the token in localStorage is valid
     const directLogin = async () => {
         try {
-            const response = await fetch(`${URL}/direct-login`, {
+            const response = await fetch(`${ipAddr}/api/auth/direct-login`, {
                 method: 'POST',
                 headers: {
                     'authToken': localStorage.getItem('authToken')
@@ -163,7 +162,7 @@ const AccountState = (props) => {
     return (
         <AccountContext.Provider value={{
             logged, setLogged, createAccount, getAccount, directLogin, checkResponse,
-            alert, setAlert, hideAlert
+            alert, setAlert, hideAlert, ipAddr
         }}>
             {props.children}
         </AccountContext.Provider>

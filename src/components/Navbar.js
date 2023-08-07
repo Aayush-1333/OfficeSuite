@@ -3,10 +3,12 @@ import { Link, useNavigate } from 'react-router-dom'
 import ThemeButton from './ThemeButton'
 import AccountContext from '../context/accounts/AccountContext'
 import logo from './logo.png';
+import NewsContext from '../context/news/NewsContext';
 
 export default function Navbar() {
 
     const { logged, setLogged, directLogin, setAlert } = useContext(AccountContext);
+    const { getByCategory } = useContext(NewsContext);
     const navigate = useNavigate();
 
 
@@ -82,6 +84,28 @@ export default function Navbar() {
                         <li className="nav-item">
                             <Link className="nav-link fw-bold" aria-current="page" to="/">Support</Link>
                         </li>
+
+                        <div className="dropdown">
+                            <button className="nav-link fw-bold dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                News
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("general") }}>General</button></li>
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("health") }}>Health</button></li>
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("science") }}>Science</button></li>
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("technology") }}>Technology</button></li>
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("sports") }}>Sports</button></li>
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("business") }}>Business</button></li>
+                                <li><button className="dropdown-item" type="button"
+                                    onClick={() => { getByCategory("entertainment") }}>Entertainment</button></li>
+                            </ul>
+                        </div>
 
                         {logged.status && <li className='nav-item'><a className='nav-link fw-bold' data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">Dashboard</a></li>}
 

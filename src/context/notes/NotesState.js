@@ -5,11 +5,9 @@ import AccountContext from '../accounts/AccountContext';
 
 const NoteState = (props) => {
 
-    // URL of the backend for notes
-    const URL = 'http://192.168.1.6:4000/api/notes';
-
     // Context variables
     const { logged, checkResponse, setAlert } = useContext(AccountContext);
+    const { ipAddr } = useContext(AccountContext);
 
     // ======== State variables ========
     const [notes, setNotes] = useState(null);
@@ -23,7 +21,7 @@ const NoteState = (props) => {
     // fetches the notes of specific user using `user id`
     const getNotes = async () => {
         try {
-            const response = await fetch(`${URL}`, {
+            const response = await fetch(`${ipAddr}/api/notes`, {
                 headers: {
                     'authToken': localStorage.getItem('authToken')
                 }
@@ -42,7 +40,7 @@ const NoteState = (props) => {
     // creates the note and stores in the database
     const createNote = async (noteData) => {
         try {
-            const response = await fetch(`${URL}/create-note`, {
+            const response = await fetch(`${ipAddr}/api/notescreate-note`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -56,8 +54,7 @@ const NoteState = (props) => {
             });
 
             checkResponse(response);
-            const result = await response.json();
-            if(response.ok) {
+            if (response.ok) {
                 setAlert({
                     status: 'visible',
                     type: 'success',
@@ -100,7 +97,7 @@ const NoteState = (props) => {
     // updates the note that has been fetched uisng fetchNoteById() function 
     const updateNote = async (data) => {
         try {
-            const response = await fetch(`${URL}/edit-note/${editNote}`, {
+            const response = await fetch(`${ipAddr}/api/notes/edit-note/${editNote}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -126,7 +123,7 @@ const NoteState = (props) => {
     // deletes the particular note using note id 
     const deleteNote = async (id) => {
         try {
-            const response = await fetch(`${URL}/delete-note/${id}`, {
+            const response = await fetch(`${ipAddr}/api/notes/delete-note/${id}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
