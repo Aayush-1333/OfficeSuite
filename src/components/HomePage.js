@@ -5,12 +5,13 @@ import Alert from './Alert'
 import AccountContext from '../context/accounts/AccountContext'
 import ThemeContext from '../context/themes/ThemeContext'
 import NewsContext from '../context/news/NewsContext'
+import loader from './loading.gif';
 
 export default function HomePage() {
 
     const { alert, hideAlert } = useContext(AccountContext);
     const { theme } = useContext(ThemeContext);
-    const { articles, getNews } = useContext(NewsContext);
+    const { articles, getNews, loading } = useContext(NewsContext);
 
     let keyId = 0;
 
@@ -28,11 +29,11 @@ export default function HomePage() {
             <Alert message={alert.msg} type={alert.type} visibility={alert.status} />
             <div>
                 <h1 className='mx-4 bg-success p-2 rounded-4'>Latest News</h1>
-                <div className='row'>
+                {loading ? <div className='loading-page d-flex justify-content-center'><img className='text-center' src={loader} alt='loading' /></div> : <div className='row'>
                     {articles ? articles.map(articleRow => {
                         return <UpdatesItem key={keyId++} data={articleRow} />
-                    }) : "No news"}
-                </div>
+                    }) : <h1 className='text-center my-3 loading-page'>No news</h1>}
+                </div>}
             </div>
         </div>
     )

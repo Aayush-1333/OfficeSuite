@@ -33,6 +33,7 @@ app.get('*', async (req, res) => {
     res.sendFile(path.join(__dirname, '../build/index.html'));
 })
 
+
 // Connecting to MongoDB database at given PORT
 ConnectToMongo(process.env.USER, process.env.PASSWD, process.env.HOST, process.env.DB_PORT, process.env.DB_NAME)
     .then(() => {
@@ -44,3 +45,4 @@ ConnectToMongo(process.env.USER, process.env.PASSWD, process.env.HOST, process.e
     .catch((error) => {
         console.log({ error: error.message });
     })
+ 

@@ -9,6 +9,7 @@ const NewsState = function (props) {
 
     // State variables
     const [articles, setArticles] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     const getNews = async () => {
         const response = await fetch(`${ipAddr}/news`);
@@ -28,9 +29,11 @@ const NewsState = function (props) {
 
         fetchedArticles.push(articlesRow);
         setArticles(fetchedArticles);
+        setLoading(false);
     }
 
     const getByCategory = async (category) => {
+        setLoading(true);
         const response = await fetch(`${ipAddr}/news/${category}`);
 
         const result = await response.json();
@@ -47,10 +50,11 @@ const NewsState = function (props) {
 
         fetchedArticles.push(articlesRow);
         setArticles(fetchedArticles);
+        setLoading(false);
     }
 
     return (
-        <NewsContext.Provider value={{ articles, getByCategory, getNews }}>
+        <NewsContext.Provider value={{ articles, getByCategory, getNews, loading }}>
             {props.children}
         </NewsContext.Provider>
     )

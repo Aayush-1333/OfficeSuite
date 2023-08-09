@@ -65,11 +65,11 @@ export default function Navbar() {
                     <hr />
                     <div className="offcanvas-body">
                         <h3>Notes Section</h3>
-                        <Link className="nav-link my-4" to="/notes">My Notes</Link>
+                        <Link className="nav-link my-4" to="/notes">&#128394; My Notes</Link>
                         <hr />
                         <h3>More Services</h3>
-                        <Link className="nav-link my-4" to="/">Office Pro</Link>
-                        <Link className="nav-link my-4" to="/">OfficeBuddy</Link>
+                        <Link className="nav-link my-4" to="/">&#10031; Office Pro Subscription</Link>
+                        <Link className="nav-link my-4" to="/">&#128717; OfficeBuddy Store</Link>
                     </div>
                 </div>
             </div>}
