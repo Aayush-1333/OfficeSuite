@@ -9,7 +9,7 @@
     `express-validator` is used to validate all the requests from the client's side
     `bcryptjs` is used to encrypt the password in the form of hash values in the database and
     `jsonwebtoken` is used to generate JSON web tokens as authTokens 
-*/ 
+*/
 const express = require('express');
 const Accounts = require('../models/Accounts');
 const router = express.Router();
@@ -17,6 +17,7 @@ const { validationResult, body } = require('express-validator');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchUser = require('../middleware/fetchUser');
+const nodemailer = require('nodemailer');
 
 
 // creates a user account and validates all the fields
@@ -113,6 +114,41 @@ router.post('/direct-login', fetchUser, async (req, res) => {
         return res.status(500).json("Server Error: Can't login directly!")
     }
 
+})
+
+
+// Verifies the email by sending the OTP to the email address
+router.post('/verify-email', async (req, res) => {
+    try {
+
+        const account = await Accounts.find({ email: req.body.recipient })
+        
+        if (account[0])
+            return res.status(400).json("Email already exists!");
+
+        const transporter = nodemailer.createTransport({
+            host: "smtp.gmail.com",
+            port: 465,
+            secure: true,
+            auth: {
+                user: "hellbreath62@gmail.com",
+                pass: "yuszerfpeeqqxdyx"
+            }
+        })
+
+        const otp = Math.floor(1000 + Math.random() * 9000);
+        await transporter.sendMail({
+            from: '"Office Suite" <hellbreath62@gmail.com>',
+            to: req.body.recipient,
+            subject: "OTP for email verification",
+            text: `Your OTP is ${otp}`
+        })
+
+        return res.status(200).json(otp);
+
+    } catch (error) {
+        return res.status(500).json("Internal Server Error!")
+    }
 })
 
 module.exports = router;

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import NoteContext from '../context/notes/NoteContext';
+import NoteContext from '../../context/notes/NoteContext';
 import { useNavigate } from 'react-router-dom';
 import noteImg from './NoteImg.png'
 

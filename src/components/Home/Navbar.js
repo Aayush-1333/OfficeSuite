@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ThemeButton from './ThemeButton'
-import AccountContext from '../context/accounts/AccountContext'
+import AccountContext from '../../context/accounts/AccountContext'
 import logo from './logo.png';
+import NewsContext from '../../context/news/NewsContext';
 
 export default function Navbar() {
 
     const { logged, setLogged, directLogin, setAlert } = useContext(AccountContext);
+    const { getByCategory } = useContext(NewsContext);
     const navigate = useNavigate();
 
 
@@ -52,7 +54,7 @@ export default function Navbar() {
 
     return (
         <div>
-            {logged.status && <div className="container-fluid">
+            {logged.status && <Link className="container-fluid">
                 <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
                     <div className="offcanvas-header">
                         <h5 className="offcanvas-title" id="offcanvasLabel">
@@ -63,14 +65,14 @@ export default function Navbar() {
                     <hr />
                     <div className="offcanvas-body">
                         <h3>Notes Section</h3>
-                        <Link className="nav-link my-4" to="/notes">My Notes</Link>
+                        <Link className="nav-link my-4" to="/notes">&#128394; My Notes</Link>
                         <hr />
                         <h3>More Services</h3>
-                        <Link className="nav-link my-4" to="/">Office Pro</Link>
-                        <Link className="nav-link my-4" to="/">OfficeBuddy</Link>
+                        <Link className="nav-link my-4" to="/">&#10031; Office Pro Subscription</Link>
+                        <Link className="nav-link my-4" to="/">&#128717; OfficeBuddy Store</Link>
                     </div>
                 </div>
-            </div>}
+            </Link>}
 
             <nav className="navbar navbar-expand-lg bg-body-tertiary p-4">
                 <Link className="navbar-brand" to="/"><img src={logo} alt="brand logo" width="30" height="30" /> OfficeSuite</Link>
@@ -83,6 +85,28 @@ export default function Navbar() {
                             <Link className="nav-link fw-bold" aria-current="page" to="/">Support</Link>
                         </li>
 
+                        <div className="dropdown">
+                            <button className="nav-link fw-bold dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                News
+                            </button>
+                            <ul className="dropdown-menu">
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("general") }}>General</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("health") }}>Health</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("science") }}>Science</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("technology") }}>Technology</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("sports") }}>Sports</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("business") }}>Business</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("entertainment") }}>Entertainment</Link></li>
+                            </ul>
+                        </div>
+
                         {logged.status && <li className='nav-item'><a className='nav-link fw-bold' data-bs-toggle="offcanvas" href="#offcanvas" role="button" aria-controls="offcanvas">Dashboard</a></li>}
 
                         <li>
@@ -92,10 +116,6 @@ export default function Navbar() {
                         </li>
                     </ul>
 
-                    <div>
-
-                    </div>
-
                     <ThemeButton />
                     <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -104,7 +124,6 @@ export default function Navbar() {
                 </div>
 
             </nav>
-
         </div >
     )
 }

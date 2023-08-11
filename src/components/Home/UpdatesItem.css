@@ -1,0 +1,22 @@
+.news-item {
+    border: 2px solid black;
+    margin: 15px;
+    border-radius: 10px;
+    word-wrap: break-word;
+}
+
+.news-img {
+    border-radius: 10px;
+}
+
+@media screen and (max-width: '750px') {
+    .news-item {
+        height: 350px;
+    }
+}
+
+@media screen and (max-width: '390px') {
+    .news-item {
+        height: 50px;
+    }
+}

@@ -1,15 +1,15 @@
 import React, { useContext, useEffect } from 'react'
-import NoteContext from '../context/notes/NoteContext'
-import AccountContext from '../context/accounts/AccountContext';
+import NoteContext from '../../context/notes/NoteContext'
+import AccountContext from '../../context/accounts/AccountContext';
 import { Link, useNavigate } from 'react-router-dom'
-import '../styles/NotesPage.css'
+import './NotesPage.css'
 import NoteItem from './NoteItem';
-import Alert from './Alert';
+import Alert from '../Home/Alert';
 
 export default function NotesPage() {
 
   const { notes, getNotes } = useContext(NoteContext);
-  const { logged, alert, setAlert } = useContext(AccountContext);
+  const { logged, alert, hideAlert } = useContext(AccountContext);
   const navigate = useNavigate();
 
   const getAll = async () => {
@@ -25,12 +25,9 @@ export default function NotesPage() {
     else
       getAll(); // fetch all notes
 
-    if (alert.status) {
+    if (alert.status)
       // trigger logged in alert
-      setTimeout(() => {
-        setAlert({ ...alert, status: 'hidden', msg: '' })
-      }, 1500)
-    }
+      hideAlert();
 
   }, [logged.status, alert.status])
 

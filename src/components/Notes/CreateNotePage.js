@@ -1,9 +1,9 @@
 import React, { useContext, useState, useEffect } from 'react'
-import NoteContext from '../context/notes/NoteContext';
+import NoteContext from '../../context/notes/NoteContext';
 import MDEditor from '@uiw/react-md-editor';
-import AccountContext from '../context/accounts/AccountContext';
+import AccountContext from '../../context/accounts/AccountContext';
 import { useNavigate, Link } from 'react-router-dom';
-import Alert from './Alert';
+import Alert from '../Home/Alert';
 
 export default function CreateNotePage() {
 

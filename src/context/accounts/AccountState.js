@@ -3,10 +3,18 @@ import AccountContext from './AccountContext'
 
 const AccountState = (props) => {
 
-    // URL of backend for the accounts
-    const URL = "http://192.168.1.11:4000/api/auth";
-
     // =========== State variables ============
+    const [ipAddr, setIpAddr] = useState("http://192.168.1.5:4000");
+    const [otp, setOtp] = useState('');
+
+    const [accountData, setAccountData] = useState({
+        username: '',
+        name: '',
+        phone: '',
+        email: '',
+        password: ''
+    })
+
     const [logged, setLogged] = useState({
         status: false,
         username: ''
@@ -64,7 +72,7 @@ const AccountState = (props) => {
     // calls the API to create the account
     const createAccount = async (data) => {
         try {
-            const response = await fetch(`${URL}/create-account`, {
+            const response = await fetch(`${ipAddr}/api/auth/create-account`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -73,8 +81,15 @@ const AccountState = (props) => {
             });
 
             const result = await response.json()
-            localStorage.setItem('authToken', result.authToken);
-            console.log(result);
+
+            if (response.ok) {
+                localStorage.setItem('authToken', result.authToken);
+                setAlert({
+                    status: 'visible',
+                    type: 'success',
+                    msg: "Account created successfully!"
+                })
+            }
 
         } catch (error) {
             console.log({ error: error.message });
@@ -85,7 +100,7 @@ const AccountState = (props) => {
     // calls the API to get account details of desired user
     const getAccount = async (loginDetails) => {
         try {
-            const response = await fetch(`${URL}/get-account`, {
+            const response = await fetch(`${ipAddr}/api/auth/get-account`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -127,7 +142,7 @@ const AccountState = (props) => {
     // provides direct login to the existing user if the token in localStorage is valid
     const directLogin = async () => {
         try {
-            const response = await fetch(`${URL}/direct-login`, {
+            const response = await fetch(`${ipAddr}/api/auth/direct-login`, {
                 method: 'POST',
                 headers: {
                     'authToken': localStorage.getItem('authToken')
@@ -160,10 +175,39 @@ const AccountState = (props) => {
         }
     }
 
+
+    const verifyEmail = async (emailAddr) => {
+        try {
+            const response = await fetch(`${ipAddr}/api/auth/verify-email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ recipient: emailAddr })
+            })
+
+            const result = await response.json();
+
+            if (response.ok)
+                setOtp(result);
+            else {
+                setAlert({
+                    status: 'visible',
+                    type: 'danger',
+                    msg: result
+                })
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <AccountContext.Provider value={{
             logged, setLogged, createAccount, getAccount, directLogin, checkResponse,
-            alert, setAlert, hideAlert
+            alert, setAlert, hideAlert, ipAddr, accountData, setAccountData, verifyEmail,
+            otp
         }}>
             {props.children}
         </AccountContext.Provider>
