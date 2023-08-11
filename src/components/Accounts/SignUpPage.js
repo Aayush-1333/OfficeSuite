@@ -1,29 +1,27 @@
 import React, { useContext, useEffect, useState } from 'react'
-import AccountContext from '../context/accounts/AccountContext';
+import AccountContext from '../../context/accounts/AccountContext';
 import { useNavigate } from 'react-router-dom';
-import Alert from './Alert';
+import Alert from '../Home/Alert';
 
 export default function SignUpPage() {
 
     const navigate = useNavigate();
-    const [accountData, setAccountData] = useState({
-        username: '',
-        name: '',
-        phone: '',
-        email: '',
-        password: ''
-    })
-    const { createAccount, alert, setAlert, hideAlert } = useContext(AccountContext);
+    const { alert, setAlert, hideAlert, accountData, setAccountData } = useContext(AccountContext);
 
     useEffect(() => {
-        if(alert.status)
+        if (alert.status)
             hideAlert();
     }, [alert.status])
 
-    const SubmitForm = (e) => {
+    const SubmitForm = async (e) => {
         e.preventDefault();
+        setAccountData({
+            ...accountData,
+            username: accountData.username.trim(),
+            name: accountData.name.trim()
+        })
 
-        if (accountData.phone.length !== 10 || !accountData.phone.isNaN()) {
+        if (accountData.phone.length !== 10 || isNaN(accountData.phone)) {
             setAlert({
                 status: 'visible',
                 type: 'danger',
@@ -33,11 +31,11 @@ export default function SignUpPage() {
         else if (accountData.name.length < 3 || accountData.name.length > 40) {
             setAlert({
                 status: 'visible',
-                type:'danger',
+                type: 'danger',
                 msg: 'Invalid name length! min length = 3 max length = 40'
             })
         }
-        else if (accountData.username.length < 3 || accountData.username.length > 20 ) {
+        else if (accountData.username.length < 3 || accountData.username.length > 20) {
             setAlert({
                 status: 'visible',
                 type: 'danger',
@@ -52,8 +50,12 @@ export default function SignUpPage() {
             })
         }
         else {
-            createAccount({ ...accountData });
-            navigate('/login')
+            setAlert({
+                status: 'visible',
+                type: 'success',
+                msg: 'An OTP has been sent to your email address!'
+              })
+            navigate('/verify');
         }
 
     }

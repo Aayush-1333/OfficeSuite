@@ -1,9 +1,9 @@
 import React, { useContext } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import ThemeButton from './ThemeButton'
-import AccountContext from '../context/accounts/AccountContext'
+import AccountContext from '../../context/accounts/AccountContext'
 import logo from './logo.png';
-import NewsContext from '../context/news/NewsContext';
+import NewsContext from '../../context/news/NewsContext';
 
 export default function Navbar() {
 
@@ -54,7 +54,7 @@ export default function Navbar() {
 
     return (
         <div>
-            {logged.status && <div className="container-fluid">
+            {logged.status && <Link className="container-fluid">
                 <div className="offcanvas offcanvas-start" tabIndex="-1" id="offcanvas" aria-labelledby="offcanvasLabel">
                     <div className="offcanvas-header">
                         <h5 className="offcanvas-title" id="offcanvasLabel">
@@ -72,7 +72,7 @@ export default function Navbar() {
                         <Link className="nav-link my-4" to="/">&#128717; OfficeBuddy Store</Link>
                     </div>
                 </div>
-            </div>}
+            </Link>}
 
             <nav className="navbar navbar-expand-lg bg-body-tertiary p-4">
                 <Link className="navbar-brand" to="/"><img src={logo} alt="brand logo" width="30" height="30" /> OfficeSuite</Link>
@@ -90,20 +90,20 @@ export default function Navbar() {
                                 News
                             </button>
                             <ul className="dropdown-menu">
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("general") }}>General</button></li>
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("health") }}>Health</button></li>
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("science") }}>Science</button></li>
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("technology") }}>Technology</button></li>
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("sports") }}>Sports</button></li>
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("business") }}>Business</button></li>
-                                <li><button className="dropdown-item" type="button"
-                                    onClick={() => { getByCategory("entertainment") }}>Entertainment</button></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("general") }}>General</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("health") }}>Health</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("science") }}>Science</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("technology") }}>Technology</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("sports") }}>Sports</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("business") }}>Business</Link></li>
+                                <li><Link className="dropdown-item" to='/'
+                                    onClick={() => { getByCategory("entertainment") }}>Entertainment</Link></li>
                             </ul>
                         </div>
 
@@ -116,10 +116,6 @@ export default function Navbar() {
                         </li>
                     </ul>
 
-                    <div>
-
-                    </div>
-
                     <ThemeButton />
                     <form className="d-flex" role="search">
                         <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
@@ -128,7 +124,6 @@ export default function Navbar() {
                 </div>
 
             </nav>
-
         </div >
     )
 }

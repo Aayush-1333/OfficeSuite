@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from 'react'
-import '../styles/HomePage.css'
+import './HomePage.css'
 import UpdatesItem from './UpdatesItem'
 import Alert from './Alert'
-import AccountContext from '../context/accounts/AccountContext'
-import ThemeContext from '../context/themes/ThemeContext'
-import NewsContext from '../context/news/NewsContext'
+import AccountContext from '../../context/accounts/AccountContext'
+import ThemeContext from '../../context/themes/ThemeContext'
+import NewsContext from '../../context/news/NewsContext'
 import loader from './loading.gif';
 
 export default function HomePage() {

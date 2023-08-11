@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import ThemeContext from '../context/themes/ThemeContext';
+import ThemeContext from '../../context/themes/ThemeContext';
 
 export default function ThemeButton() {
 

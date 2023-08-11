@@ -5,6 +5,15 @@ const AccountState = (props) => {
 
     // =========== State variables ============
     const [ipAddr, setIpAddr] = useState("http://192.168.1.5:4000");
+    const [otp, setOtp] = useState('');
+
+    const [accountData, setAccountData] = useState({
+        username: '',
+        name: '',
+        phone: '',
+        email: '',
+        password: ''
+    })
 
     const [logged, setLogged] = useState({
         status: false,
@@ -72,8 +81,15 @@ const AccountState = (props) => {
             });
 
             const result = await response.json()
-            localStorage.setItem('authToken', result.authToken);
-            console.log(result);
+
+            if (response.ok) {
+                localStorage.setItem('authToken', result.authToken);
+                setAlert({
+                    status: 'visible',
+                    type: 'success',
+                    msg: "Account created successfully!"
+                })
+            }
 
         } catch (error) {
             console.log({ error: error.message });
@@ -159,10 +175,39 @@ const AccountState = (props) => {
         }
     }
 
+
+    const verifyEmail = async (emailAddr) => {
+        try {
+            const response = await fetch(`${ipAddr}/api/auth/verify-email`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ recipient: emailAddr })
+            })
+
+            const result = await response.json();
+
+            if (response.ok)
+                setOtp(result);
+            else {
+                setAlert({
+                    status: 'visible',
+                    type: 'danger',
+                    msg: result
+                })
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
     return (
         <AccountContext.Provider value={{
             logged, setLogged, createAccount, getAccount, directLogin, checkResponse,
-            alert, setAlert, hideAlert, ipAddr
+            alert, setAlert, hideAlert, ipAddr, accountData, setAccountData, verifyEmail,
+            otp
         }}>
             {props.children}
         </AccountContext.Provider>

@@ -6,15 +6,16 @@ import {
 import AccountState from './context/accounts/AccountState';
 import NoteState from './context/notes/NotesState';
 import NewsState from './context/news/NewsState';
-
-import HomePage from './components/HomePage';
-import Navbar from './components/Navbar';
-import LoginPage from './components/LoginPage';
-import SignUpPage from './components/SignUpPage';
-import NotesPage from './components/NotesPage';
-import CreateNotePage from './components/CreateNotePage';
-import EditNotePage from './components/EditNotePage';
 import ThemeState from './context/themes/ThemeState';
+
+import HomePage from './components/Home/HomePage';
+import Navbar from './components/Home/Navbar';
+import LoginPage from './components/Accounts/LoginPage';
+import SignUpPage from './components/Accounts/SignUpPage';
+import NotesPage from './components/Notes/NotesPage';
+import CreateNotePage from './components/Notes/CreateNotePage';
+import EditNotePage from './components/Notes/EditNotePage';
+import Verify from './components/Accounts/Verify';
 
 function App() {
 
@@ -32,6 +33,7 @@ function App() {
                                         <Route path='/' element={<HomePage />} />
                                         <Route path='/login' element={<LoginPage />} />
                                         <Route path='/sign-up' element={<SignUpPage />} />
+                                        <Route path='/verify' element={<Verify />} />
                                         <Route path='/notes' element={<NotesPage />} />
                                         <Route path='/create-note' element={<CreateNotePage />} />
                                         <Route path='/edit-note' element={<EditNotePage />} />

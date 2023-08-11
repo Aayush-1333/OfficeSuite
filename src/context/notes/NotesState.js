@@ -40,7 +40,7 @@ const NoteState = (props) => {
     // creates the note and stores in the database
     const createNote = async (noteData) => {
         try {
-            const response = await fetch(`${ipAddr}/api/notescreate-note`, {
+            const response = await fetch(`${ipAddr}/api/notes/create-note`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

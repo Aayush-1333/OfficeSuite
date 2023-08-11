@@ -1,3 +1,11 @@
+/*
+    These are the backend routes for the news
+
+    Routes:
+    - Store News (GET): Fetches the news using API and stores the news in the database
+    - Fetch News (GET): Fetches the news from the database
+    - Fetch news by category (GET): Fetches the news by category from the database
+*/
 const express = require('express');
 const router = express.Router();
 const News = require('../models/News');

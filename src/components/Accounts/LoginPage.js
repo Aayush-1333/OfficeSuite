@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import AccountContext from '../context/accounts/AccountContext'
-import Alert from './Alert';
+import AccountContext from '../../context/accounts/AccountContext'
+import Alert from '../Home/Alert';
 
 export default function LoginPage() {
 
@@ -10,7 +10,7 @@ export default function LoginPage() {
         password: ""
     })
 
-    const { getAccount, logged, alert, setAlert } = useContext(AccountContext);
+    const { getAccount, logged, alert, hideAlert } = useContext(AccountContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,13 +18,7 @@ export default function LoginPage() {
             navigate('/notes');
 
         if (alert.status === 'visible') {
-            setTimeout(() => {
-                setAlert({
-                    status: 'hidden',
-                    type: 'primary',
-                    msg: ''
-                })
-            }, 1500)
+            hideAlert();
         }
     }, [logged.status, alert.status])
 

@@ -1,5 +1,5 @@
 import React from 'react'
-import '../styles/UpdatesItem.css'
+import './UpdatesItem.css'
 import updateImg from './UpdateImg.png'
 
 export default function UpdatesItem(props) {
