@@ -30,8 +30,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "mern": "concurrently \"nodemon backend/server.js\" \"npm run start\"",
-    "dev": "cross-env DOTENV_KEY=\"dotenv://:key_5ab0087f03d925f1f77f2b9fa76df114fe49e62e38f30021a17b2c38fa0b1934@dotenv.org/vault/.env.vault?environment=development\" nodemon backend/server.js"
+    "mern": "concurrently \"nodemon backend/server.js\" \"npm run start\""
   },
   "eslintConfig": {
     "extends": [
