@@ -18,6 +18,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const fetchUser = require('../middleware/fetchUser');
 const nodemailer = require('nodemailer');
+require("dotenv").config()
 
 
 // creates a user account and validates all the fields
@@ -132,7 +133,7 @@ router.post('/verify-email', async (req, res) => {
             secure: true,
             auth: {
                 user: "hellbreath62@gmail.com",
-                pass: "yuszerfpeeqqxdyx"
+                pass: process.env.GOOGLE_API_KEY
             }
         })
 

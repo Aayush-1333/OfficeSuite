@@ -4,7 +4,7 @@ import AccountContext from './AccountContext'
 const AccountState = (props) => {
 
     // =========== State variables ============
-    const [ipAddr, setIpAddr] = useState("http://192.168.1.5:4000");
+    const [ipAddr, setIpAddr] = useState("http://192.168.1.46:4000");
     const [otp, setOtp] = useState('');
 
     const [accountData, setAccountData] = useState({

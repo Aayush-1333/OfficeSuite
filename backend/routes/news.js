@@ -13,6 +13,7 @@ const jwt = require('jsonwebtoken');
 const SECRET_NEWS_TOKEN = "newsboy55"
 require('dotenv').config();
 let newsToken = null;
+const newsApi = process.env.NEWS_API_KEY
 
 
 // Stores the news in the database
@@ -32,7 +33,7 @@ router.get('/store-news', async (req, res) => {
 
         // store all types of news in database
         for (let cat of categories) {
-            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=9b75a4da60ca464b94b21f2bcc74ae64`);
+            const response = await fetch(`https://newsapi.org/v2/top-headlines?country=in&category=${cat}&apiKey=${newsApi}`);
             const result = await response.json();
 
             for (let article of result.articles) {

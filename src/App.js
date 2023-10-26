@@ -18,8 +18,6 @@ import EditNotePage from './components/Notes/EditNotePage';
 import Verify from './components/Accounts/Verify';
 
 function App() {
-
-
     return (
         <div>
             <AccountState>

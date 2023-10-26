@@ -10,6 +10,7 @@ const express = require('express');
 const ConnectToMongo = require('./db');
 const path = require('path');
 const app = express();
+const mongoUri = process.env.MONGO_URI
 
 app.use(express.static(path.join(__dirname, '../build')));
 app.use(cors());
@@ -35,7 +36,7 @@ app.get('*', async (req, res) => {
 
 
 // Connecting to MongoDB database at given PORT
-ConnectToMongo(process.env.USER, process.env.PASSWD, process.env.HOST, process.env.DB_PORT, process.env.DB_NAME)
+ConnectToMongo(mongoUri)
     .then(() => {
         console.log("Connected to database successfully!");
         app.listen(process.env.PORT, () => {
